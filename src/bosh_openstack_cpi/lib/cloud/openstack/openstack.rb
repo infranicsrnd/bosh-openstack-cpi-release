@@ -118,7 +118,7 @@ module Bosh::OpenStackCloud
         begin
           Bosh::Common.retryable(@retry_options) do |tries, error|
             @logger.error("Failed #{tries} times, last failure due to: #{error.inspect}") unless error.nil?
-
+            @logger.debug("params_without_provider = #{params_without_provider}")
             begin
               @glance = Fog::Image::OpenStack::V2.new(params_without_provider)
             rescue Fog::OpenStack::Errors::ServiceUnavailable
